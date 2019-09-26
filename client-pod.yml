@@ -1,0 +1,17 @@
+# NOTE: FOR USE IN DEV ONLY. NOT RECOMMENDED FOR PROD.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  labels:
+    component: web
+spec:
+  containers:
+    - name: client
+      image: s1dequest/multi-client
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      ports:
+        - containerPort: 3000
