@@ -1,5 +1,5 @@
 # Deploying (locally) with MiniKube
-## Using pods for dev, deployments for prod.
+### Initially built with pods for dev, swapped to deployments for dev/prod.
 
 ### Steps:
 1. Start minikube (network = public, not internal)
@@ -14,7 +14,8 @@
     * The `spec:selector:matchLabels:component:web` matches the labels in the pod template.
 3. Monitor new objects.
   * `kubectl get pods` Show pods in cluster and various attributes of them.
-  * `kubectl get services` Same as above, but for Service objects.
+  * `kubectl get deployments` Same as above, for Deployment objects.
+  * `kubectl get services` Same as above, for Service objects.
   * If pod is unhealthy, crashlooping, etc...
     * `kubectl run -it $arbitrary-name$ --image $docker-hub-id$/$image-name$`
     * Above command will pull down a new copy of your image, and exec inside it.
@@ -37,3 +38,5 @@
     * `$object-name$` is optional.
     * Ex: `kubectl describe pods client-pod`
   * Output of above will display the container/image we are now running (`multi-worker`).
+
+
