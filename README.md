@@ -39,4 +39,17 @@
     * Ex: `kubectl describe pods client-pod`
   * Output of above will display the container/image we are now running (`multi-worker`).
 
-
+### Updating images & enabling our Deployments to pull the new image version:
+1. Make a change to some existing Docker Hub image.
+  * Ex: Change the app title in App.js in the multi-client container to "... v2"
+    * Can be found in the s1dequest/multi-docker GitHub project.
+2. Rebuild the image with the new changes.
+  * `docker build -t $docker-id$/$image-name$:$version-number$`
+    * Example here uses `s1dequest/multi-client:v2`.
+  * The version tag after the image name allows us to differentiate between versions in our Deployment object.
+3. Push changes to Docker Hub
+  * `docker push $docker-id$/$image-name$:$version-number$`
+4. Use an imperative command to update the image version the deployment should use.
+  * AKA: Run a `kubectl` command forcing the deployment ot use the new image version.
+  * `kubectl set image $object-type$/$object-name$ $container-name$=$new-image-to-use$`
+  * `kubectl set image Deployment/client-deployment client=s1dequest/multi-client:v2`
